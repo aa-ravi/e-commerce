@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameZone | Contact Us</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* CSS variables (root element) */
+        :root {
+            --primary: #22c55e;
+            --dark-bg: #0f172a;
+            --header-bg: #020617;
+            --card-bg: #020617;
+            --text: white;
+            --text-secondary: #cbd5e1;
+            --border: #1e293b;
+            --input-bg: #1e293b;
+            --success: #22c55e;
+            --error: #ef4444;
+            --warning: #f59e0b;
+        }
+        
+        /* Light theme variables */
+        .light-theme {
+            --primary: #16a34a;
+            --dark-bg: #f8fafc;
+            --header-bg: #ffffff;
+            --card-bg: #ffffff;
+            --text: #0f172a;
+            --text-secondary: #475569;
+            --border: #e2e8f0;
+            --input-bg: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text);
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 60px;
+            background: var(--header-bg);
+            border-bottom: 2px solid var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 26px;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav a {
+            position: relative;
+            margin: 0 15px;
+            text-decoration: none;
+            color: var(--text);
+            padding-bottom: 5px;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--primary);
+            transition: 0.3s;
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav a:hover {
+            color: var(--primary);
+        }
+
+        .nav a.active {
+            color: var(--primary);
+        }
+
+        .nav a.active::after {
+            width: 100%;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .theme-toggle {
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .cart {
+            font-size: 18px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--primary);
+            color: black;
+            font-size: 12px;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* CONTACT HERO WITH VIDEO BACKGROUND */
+        .contact-hero {
+            height: 60vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(2, 6, 23, 0.9), rgba(34, 197, 94, 0.3));
+            z-index: 1;
+        }
+
+        .contact-hero-content {
+            text-align: center;
+            z-index: 2;
+            position: relative;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .contact-hero-content h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 56px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            animation: slideDown 1s ease;
+            text-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+        }
+
+        .contact-hero-content p {
+            font-size: 18px;
+            color: var(--text);
+            line-height: 1.6;
+            animation: fadeIn 1.5s ease;
+        }
+
+        /* CONTACT SECTION */
+        .contact-section {
+            padding: 80px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        /* CONTACT INFO CARDS */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 30px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary);
+            transition: 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.1);
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .info-icon i {
+            font-size: 24px;
+            color: black;
+        }
+
+        .info-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .info-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 5px;
+        }
+
+        .info-card .detail {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        /* SOCIAL MEDIA CARDS */
+        .social-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        .social-section h3 {
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .social-item {
+            background: var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .social-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .social-item i {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .social-item span {
+            display: block;
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        .social-item.discord:hover { background: #5865F2; }
+        .social-item.twitter:hover { background: #1DA1F2; }
+        .social-item.instagram:hover { background: #E4405F; }
+        .social-item.youtube:hover { background: #FF0000; }
+        .social-item.facebook:hover { background: #1877F2; }
+        .social-item.twitch:hover { background: #9146FF; }
+
+        /* CONTACT FORM */
+        .contact-form-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 40px;
+        }
+
+        .form-header {
+            margin-bottom: 30px;
+        }
+
+        .form-header h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .form-header p {
+            color: var(--text-secondary);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            background: var(--input-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+
+        textarea.form-input {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .form-checkbox input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        .form-checkbox label {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .form-checkbox a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .form-checkbox a:hover {
+            text-decoration: underline;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary);
+            border: none;
+            border-radius: 8px;
+            color: black;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(34, 197, 94, 0.3);
+        }
+
+        .submit-btn i {
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover i {
+            transform: translateX(5px);
+        }
+
+        /* SUCCESS MESSAGE */
+        .success-message {
+            background: var(--success);
+            color: black;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideIn 0.5s ease;
+        }
+
+        .success-message i {
+            font-size: 20px;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* FAQ SECTION */
+        .faq-section {
+            margin-top: 60px;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .faq-header h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .faq-header p {
+            color: var(--text-secondary);
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: var(--primary);
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question h3 {
+            font-size: 16px;
+            color: var(--text);
+        }
+
+        .faq-question i {
+            color: var(--primary);
+            transition: 0.3s;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: 0.3s;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            margin-top: 15px;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        /* MAP SECTION */
+        .map-section {
+            margin-top: 60px;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .map-container {
+            width: 100%;
+            height: 400px;
+            position: relative;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .map-overlay {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--card-bg);
+            padding: 15px 25px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            pointer-events: none;
+        }
+
+        .map-overlay p {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: var(--header-bg);
+            padding: 40px 60px 20px;
+            border-top: 1px solid var(--primary);
+            margin-top: 50px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-column h3 {
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .footer-column p, .footer-column a {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+        }
+
+        .footer-column a:hover {
+            color: var(--primary);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--primary);
+            color: black;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Scroll to top button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: black;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            z-index: 99;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Animations */
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .nav {
+                display: none;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-hero-content h1 {
+                font-size: 42px;
+            }
+            
+            .contact-section {
+                padding: 40px 20px;
+            }
+            
+            .footer {
+                padding: 40px 20px 20px;
+            }
+            
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .contact-hero {
+                height: 40vh;
+            }
+            
+            .contact-hero-content h1 {
+                font-size: 32px;
+            }
+            
+            .contact-hero-content p {
+                font-size: 16px;
+            }
+            
+            .social-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .map-container {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <a href="index.html" class="logo">GameZone</a>
+
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="accessories.html">Accessories</a>
+            <a href="about.html">About</a>
+            <a href="#" class="active">Contact</a>
+            <a href="login.html">Login</a>
+        </nav>
+
+        <div class="header-controls">
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="cart">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTACT HERO WITH VIDEO -->
+    <section class="contact-hero">
+        <video class="video-background" autoplay muted loop playsinline>
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-gamer-playing-with-rgb-keyboard-34694-large.mp4" type="video/mp4">
+            <!-- Fallback for browsers that don't support video -->
+            Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay"></div>
+        <div class="contact-hero-content">
+            <h1>GET IN TOUCH</h1>
+            <p>Have questions about our gaming accessories? Our support team is available 24/7 to help you level up your gaming experience.</p>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact-section">
+        <div class="contact-container">
+            <!-- CONTACT INFO CARDS -->
+            <div class="contact-info">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Visit Us</h3>
+                    <p class="detail">GameZone Gaming Hub</p>
+                    <p>123 Gaming Street, Andheri East</p>
+                    <p>Mumbai, Maharashtra 400069</p>
+                    <p>India</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>Call Us</h3>
+                    <p class="detail">+91 98765 43210</p>
+                    <p>Mon - Fri: 10:00 AM - 8:00 PM</p>
+                    <p>Sat - Sun: 11:00 AM - 6:00 PM</p>
+                    <p style="color: var(--primary);">24/7 Emergency Support Available</p>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email Us</h3>
+                    <p class="detail">support@gamezone.com</p>
+                    <p>sales@gamezone.com</p>
+                    <p>careers@gamezone.com</p>
+                    <p>Response within 2 hours</p>
+                </div>
+
+                <!-- SOCIAL MEDIA SECTION -->
+                <div class="social-section">
+                    <h3>Connect With Us</h3>
+                    <div class="social-grid">
+                        <a href="#" class="social-item discord">
+                            <i class="fab fa-discord"></i>
+                            <span>Discord</span>
+                        </a>
+                        <a href="#" class="social-item twitter">
+                            <i class="fab fa-twitter"></i>
+                            <span>Twitter</span>
+                        </a>
+                        <a href="#" class="social-item instagram">
+                            <i class="fab fa-instagram"></i>
+                            <span>Instagram</span>
+                        </a>
+                        <a href="#" class="social-item youtube">
+                            <i class="fab fa-youtube"></i>
+                            <span>YouTube</span>
+                        </a>
+                        <a href="#" class="social-item facebook">
+                            <i class="fab fa-facebook-f"></i>
+                            <span>Facebook</span>
+                        </a>
+                        <a href="#" class="social-item twitch">
+                            <i class="fab fa-twitch"></i>
+                            <span>Twitch</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTACT FORM -->
+            <div class="contact-form-container">
+                <div class="form-header">
+                    <h2>Send Us a Message</h2>
+                    <p>Fill out the form below and our team will get back to you within 24 hours.</p>
+                </div>
+
+                <div id="successMessage" class="success-message" style="display: none;">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Thank you! Your message has been sent successfully.</span>
+                </div>
+
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" class="form-input" id="firstName" placeholder="First Name *" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" id="lastName" placeholder="Last Name *" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" class="form-input" id="email" placeholder="Email Address *" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="tel" class="form-input" id="phone" placeholder="Phone Number (Optional)">
+                    </div>
+
+                    <div class="form-group">
+                        <select class="form-input" id="subject">
+                            <option value="" disabled selected>Select Subject *</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="support">Technical Support</option>
+                            <option value="sales">Sales & Pricing</option>
+                            <option value="returns">Returns & Refunds</option>
+                            <option value="partnership">Partnership Opportunities</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <textarea class="form-input" id="message" placeholder="Your Message *" required></textarea>
+                    </div>
+
+                    <div class="form-checkbox">
+                        <input type="checkbox" id="privacy" checked>
+                        <label for="privacy">I agree to the <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a></label>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        Send Message
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- FAQ SECTION -->
+        <div class="faq-section">
+            <div class="faq-header">
+                <h2>FREQUENTLY ASKED QUESTIONS</h2>
+                <p>Find answers to common questions about our products and services</p>
+            </div>
+
+            <div class="faq-grid">
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <h3>What is your return policy?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        We offer a 30-day hassle-free return policy. If you're not satisfied with your purchase, you can return it in original condition for a full refund or exchange.
+                    </div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <h3>How long does shipping take?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Domestic orders typically arrive within 3-5 business days. International shipping takes 7-14 business days. Free shipping on orders above ₹999.
+                    </div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <h3>Do you offer warranty on products?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! All our products come with a minimum 1-year manufacturer warranty. Premium products have extended warranty up to 3 years.
+                    </div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <h3>Do you have a physical store?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! Visit our GameZone Gaming Hub in Mumbai. You can test our products and get expert advice from our gaming specialists.
+                    </div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <h3>Do you offer bulk discounts?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, we offer special pricing for bulk orders, gaming cafes, and esports teams. Contact our sales team for customized quotes.
+                    </div>
+                </div>
+
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">
+                        <h3>How can I track my order?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Once your order ships, you'll receive a tracking number via email and SMS. You can also track your order in your account dashboard.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAP SECTION -->
+        <div class="map-section">
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.555971616775!2d72.865305!3d19.113545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c83c05b7fc89%3A0xbe87eb057f3aafda!2sAndheri%20East%2C%20Mumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+                <div class="map-overlay">
+                    <p><i class="fas fa-map-pin"></i> GameZone Gaming Hub</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>GameZone</h3>
+                <p>Your premier destination for professional gaming accessories since 2020.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-twitch"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="#">New Arrivals</a>
+                <a href="#">Best Sellers</a>
+                <a href="#">Deals & Offers</a>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Support</h3>
+                <a href="#">FAQs</a>
+                <a href="#">Shipping Policy</a>
+                <a href="#">Return Policy</a>
+                <a href="#">Warranty Info</a>
+                <a href="#">Contact Support</a>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Newsletter</h3>
+                <p>Subscribe for exclusive deals and gaming news!</p>
+                <div style="display: flex; margin-top: 15px;">
+                    <input type="email" placeholder="Your email" style="flex: 1; padding: 8px; background: var(--border); border: none; color: var(--text); border-radius: 5px 0 0 5px;">
+                    <button style="padding: 8px 15px; background: var(--primary); border: none; color: black; border-radius: 0 5px 5px 0; cursor: pointer;">Subscribe</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2026 GameZone. All Rights Reserved. | Designed for Gamers, by Gamers</p>
+        </div>
+    </footer>
+
+    <!-- SCROLL TO TOP BUTTON -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-theme');
+            themeIcon.className = document.body.classList.contains('light-theme') ? 'fas fa-sun' : 'fas fa-moon';
+        });
+
+        // Scroll to top
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        
+        window.addEventListener('scroll', () => {
+            scrollToTopBtn.style.display = window.pageYOffset > 300 ? 'flex' : 'none';
+        });
+        
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Cart functionality
+        let cartCount = 0;
+        const cartCountSpan = document.querySelector('.cart-count');
+        
+        // FAQ Toggle
+        window.toggleFaq = function(element) {
+            element.classList.toggle('active');
+        };
+
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Show success message
+            successMessage.style.display = 'flex';
+            
+            // Reset form
+            contactForm.reset();
+            
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 5000);
+        });
+
+        // Input validation
+        const phoneInput = document.getElementById('phone');
+        phoneInput.addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9+]/g, '');
+        });
+
+        // Add to cart functionality
+        window.addToCart = function() {
+            cartCount++;
+            cartCountSpan.textContent = cartCount;
+            
+            // Button animation
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> Added!';
+            btn.style.background = '#16a34a';
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.background = '';
+            }, 2000);
+        };
+
+        // Video fallback
+        const video = document.querySelector('.video-background');
+        if (video) {
+            video.addEventListener('error', function() {
+                this.style.display = 'none';
+                document.querySelector('.video-overlay').style.background = 'linear-gradient(135deg, rgba(2, 6, 23, 0.95), rgba(34, 197, 94, 0.5))';
+            });
+        }
+
+        // Initialize theme
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+                document.body.classList.add('light-theme');
+                themeIcon.className = 'fas fa-sun';
+            }
+
+            // Add animation to info cards
+            const infoCards = document.querySelectorAll('.info-card');
+            infoCards.forEach((card, index) => {
+                card.style.animation = `slideDown 0.5s ease ${index * 0.1}s both`;
+            });
+        });
+    </script>
+</body>
+</html>

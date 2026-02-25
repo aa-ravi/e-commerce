@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameZone Shop | Gaming Accessories</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #22c55e;
+            --dark-bg: #0f172a;
+            --header-bg: #020617;
+            --card-bg: #020617;
+            --text: white;
+            --text-secondary: #cbd5e1;
+            --border: #1e293b;
+            --sidebar-bg: #1e293b;
+        }
+        
+        .light-theme {
+            --primary: #16a34a;
+            --dark-bg: #f8fafc;
+            --header-bg: #ffffff;
+            --card-bg: #ffffff;
+            --text: #0f172a;
+            --text-secondary: #475569;
+            --border: #e2e8f0;
+            --sidebar-bg: #f1f5f9;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 60px;
+            background: var(--header-bg);
+            border-bottom: 2px solid var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 26px;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav a {
+            position: relative;
+            margin: 0 15px;
+            text-decoration: none;
+            color: var(--text);
+            padding-bottom: 5px;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--primary);
+            transition: 0.3s;
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav a:hover {
+            color: var(--primary);
+        }
+
+        .nav a.active {
+            color: var(--primary);
+        }
+
+        .nav a.active::after {
+            width: 100%;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .theme-toggle {
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .cart {
+            font-size: 18px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--primary);
+            color: black;
+            font-size: 12px;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .shop-hero {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                        url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .shop-hero-content {
+            text-align: center;
+            z-index: 2;
+            position: relative;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .shop-hero-content h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 56px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+        }
+
+        .shop-hero-content p {
+            font-size: 18px;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .shop-container {
+            display: flex;
+            min-height: 70vh;
+            padding: 40px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .shop-sidebar {
+            width: 280px;
+            padding: 25px;
+            background: var(--sidebar-bg);
+            border-radius: 10px;
+            margin-right: 40px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .filter-section {
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+        }
+
+        .filter-section:last-child {
+            border-bottom: none;
+        }
+
+        .filter-section h3 {
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-size: 18px;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .filter-option input {
+            margin-right: 10px;
+            accent-color: var(--primary);
+        }
+
+        .filter-option label {
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        .filter-option label:hover {
+            color: var(--primary);
+        }
+
+        .price-range {
+            width: 100%;
+            height: 5px;
+            background: var(--border);
+            border-radius: 5px;
+            margin: 15px 0;
+            outline: none;
+            accent-color: var(--primary);
+        }
+
+        .price-display {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .price-display span {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .clear-filters {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .clear-filters:hover {
+            background: var(--primary);
+            color: black;
+        }
+
+        .shop-products {
+            flex: 1;
+        }
+
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .products-header h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            color: var(--primary);
+        }
+
+        .products-count {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .sort-select {
+            padding: 8px 15px;
+            background: var(--sidebar-bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .sort-select option {
+            background: var(--sidebar-bg);
+            color: var(--text);
+        }
+
+        .shop-product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .shop-product-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            transition: 0.3s;
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .shop-product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(34, 197, 94, 0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            background: var(--dark-bg);
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .product-badge {
+            background: var(--primary);
+            color: black;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+            align-self: flex-start;
+        }
+
+        .product-badge.sale {
+            background: #ef4444;
+            color: white;
+        }
+
+        .product-badge.new {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .product-badge.limited {
+            background: #8b5cf6;
+            color: white;
+        }
+
+        .shop-product-card h3 {
+            margin: 5px 0;
+            font-size: 18px;
+            flex-grow: 1;
+        }
+
+        .product-description {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .product-price {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .product-rating {
+            color: #fbbf24;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        .add-to-cart {
+            flex: 1;
+            padding: 10px;
+            background: var(--primary);
+            border: none;
+            color: black;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .add-to-cart:hover {
+            opacity: 0.9;
+        }
+
+        .wishlist-btn {
+            width: 40px;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .wishlist-btn:hover, .wishlist-btn.active {
+            color: #ef4444;
+            border-color: #ef4444;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .pagination button {
+            min-width: 40px;
+            height: 40px;
+            padding: 0 10px;
+            background: var(--sidebar-bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+
+        .pagination button:hover:not(:disabled) {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .pagination button.active {
+            background: var(--primary);
+            color: black;
+            border-color: var(--primary);
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pagination .dots {
+            background: transparent;
+            border: none;
+            cursor: default;
+            min-width: 30px;
+        }
+
+        .pagination .dots:hover {
+            border: none;
+            color: var(--text);
+        }
+
+        .no-products {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-secondary);
+            font-size: 16px;
+            grid-column: 1 / -1;
+        }
+
+        .no-products i {
+            font-size: 48px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .footer {
+            background: var(--header-bg);
+            padding: 40px 60px 20px;
+            border-top: 1px solid var(--primary);
+            margin-top: 50px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-column h3 {
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .footer-column p, .footer-column a {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+        }
+
+        .footer-column a:hover {
+            color: var(--primary);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--primary);
+            color: black;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: black;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            z-index: 99;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 992px) {
+            .shop-container {
+                flex-direction: column;
+                padding: 30px 20px;
+            }
+            
+            .shop-sidebar {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 30px;
+                position: static;
+            }
+            
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .shop-hero-content h1 {
+                font-size: 42px;
+            }
+            
+            .footer {
+                padding: 40px 20px 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+            
+            .shop-hero {
+                height: 40vh;
+            }
+            
+            .shop-hero-content h1 {
+                font-size: 32px;
+            }
+            
+            .shop-hero-content p {
+                font-size: 16px;
+            }
+            
+            .shop-product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 20px;
+            }
+            
+            .products-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">GameZone</a>
+
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="#" class="active">Shop</a>
+            <a href="accessories.html">Accessories</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html">Login</a>
+        </nav>
+
+        <div class="header-controls">
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="cart">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="shop-hero">
+        <div class="shop-hero-content">
+            <h1>GAMING SHOP</h1>
+            <p>Discover our premium collection of gaming accessories designed for victory</p>
+        </div>
+    </section>
+
+    <div class="shop-container">
+        <aside class="shop-sidebar">
+            <div class="filter-section">
+                <h3>Categories</h3>
+                <div class="filter-option">
+                    <input type="checkbox" id="mice" class="category-filter" value="mice">
+                    <label for="mice">Gaming Mice</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="keyboards" class="category-filter" value="keyboards">
+                    <label for="keyboards">Keyboards</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="headsets" class="category-filter" value="headsets">
+                    <label for="headsets">Headsets</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="controllers" class="category-filter" value="controllers">
+                    <label for="controllers">Controllers</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="mousepads" class="category-filter" value="mousepads">
+                    <label for="mousepads">Mouse Pads</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="chairs" class="category-filter" value="chairs">
+                    <label for="chairs">Gaming Chairs</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="monitors" class="category-filter" value="monitors">
+                    <label for="monitors">Monitors</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="microphones" class="category-filter" value="microphones">
+                    <label for="microphones">Microphones</label>
+                </div>
+            </div>
+            
+            <div class="filter-section">
+                <h3>Price Range</h3>
+                <input type="range" min="0" max="50000" value="50000" class="price-range" id="priceRange">
+                <div class="price-display">
+                    <span>₹0</span>
+                    <span>₹50,000+</span>
+                </div>
+                <div class="price-display">
+                    <span id="selectedPrice">Max Price: ₹50,000</span>
+                </div>
+            </div>
+            
+            <div class="filter-section">
+                <h3>Brand</h3>
+                <div class="filter-option">
+                    <input type="checkbox" id="razer" class="brand-filter" value="razer">
+                    <label for="razer">Razer</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="logitech" class="brand-filter" value="logitech">
+                    <label for="logitech">Logitech</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="steelseries" class="brand-filter" value="steelseries">
+                    <label for="steelseries">SteelSeries</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="corsair" class="brand-filter" value="corsair">
+                    <label for="corsair">Corsair</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="hyperx" class="brand-filter" value="hyperx">
+                    <label for="hyperx">HyperX</label>
+                </div>
+            </div>
+            
+            <button class="clear-filters" id="clearFilters">Clear All Filters</button>
+        </aside>
+
+        <main class="shop-products">
+            <div class="products-header">
+                <div>
+                    <h2>All Gaming Accessories</h2>
+                    <span class="products-count" id="productsCount">Showing 1-8 of 16 products</span>
+                </div>
+                <select class="sort-select" id="sortSelect">
+                    <option value="featured">Featured</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="rating">Top Rated</option>
+                </select>
+            </div>
+            
+            <div class="shop-product-grid" id="productGrid">
+                <!-- Page 1 - Products 1 to 8 -->
+                <div class="shop-product-card">
+                    <span class="product-badge">BEST SELLER</span>
+                    <img src="https://rukminim2.flixcart.com/image/480/640/jed4sy80/mouse/h/f/h/razer-deathadder-elite-ergonomic-rz01-02010100-r3a1-original-imaf3ychxqekvcr4.jpeg?q=90" alt="Razer DeathAdder Elite" class="product-image">
+                    <h3>Razer DeathAdder Elite</h3>
+                    <p class="product-description">16,000 DPI optical sensor, mechanical switches, RGB lighting, 5 programmable buttons.</p>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        <span style="color: var(--text-secondary); margin-left: 5px;">(128)</span>
+                    </div>
+                    <div class="product-price">
+                        ₹1,499 <span class="original-price">₹2,199</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" onclick="addToCart(this)">Add to Cart</button>
+                        <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+                
+                <div class="shop-product-card">
+                    <span class="product-badge new">NEW</span>
+                    <img src="https://m.media-amazon.com/images/I/71Cy-uweiJL._AC_UF1000,1000_QL80_.jpg" alt="Corsair K70 RGB Pro" class="product-image">
+                    <h3>Corsair K70 RGB Pro</h3>
+                    <p class="product-description">Mechanical gaming keyboard with Cherry MX switches, per-key RGB, aluminum frame.</p>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                        <span style="color: var(--text-secondary); margin-left: 5px;">(94)</span>
+                    </div>
+                    <div class="product-price">
+                        ₹2,499
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" onclick="addToCart(this)">Add to Cart</button>
+                        <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+                
+                <div class="shop-product-card">
+                    <span class="product-badge sale">SALE</span>
+                    <img src="https://hyperx.com/cdn/shop/files/hyperx_cloudx_stinger_core_wireless_1_main_1570x.jpg?v=1763563183" alt="HyperX Cloud II" class="product-image">
+                    <h3>HyperX Cloud II</h3>
+                    <p class="product-description">7.1 Surround sound gaming headset with noise cancellation, memory foam ear cushions.</p>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <span style="color: var(--text-secondary); margin-left: 5px;">(201)</span>
+                    </div>
+                    <div class="product-price">
+                        ₹1,999 <span class="original-price">₹2,599</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" onclick="addToCart(this)">Add to Cart</button>
+                        <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+                
+                <div class="shop-product-card">
+                    <img src="https://xboxdesignlab.xbox.com/media/wysiwyg/20039876_Custom-Image-1920-0_1083x609_01.jpg" alt="Xbox Elite Series 2" class="product-image">
+                    <h3>Xbox Elite Series 2</h3>
+                    <p class="product-description">Professional wireless controller with adjustable tension, interchangeable components.</p>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        <span style="color: var(--text-secondary); margin-left: 5px;">(156)</span>
+                    </div>
+                    <div class="product-price">
+                        ₹1,299
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" onclick="addToCart(this)">Add to Cart</button>
+                        <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+                
+                <div class="shop-product-card">
+                    <img src="https://assets2.razerzone.com/images/pnx.assets/75b4af343b3d3579b80e50f5e101645e/iskurx-mobile-usp4.jpg" alt="Razer Iskur X" class="product-image">
+                    <h3>Razer Iskur X</h3>
+                    <p class="product-description">Ergonomic gaming chair with lumbar support, 4D armrests, 180° recline.</p>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                        <span style="color: var(--text-secondary); margin-left: 5px;">(78)</span>
+                    </div>
+                    <div class="product-price">
+                        ₹8,999 <span class="original-price">₹12,999</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" onclick="addToCart(this)">Add to Cart</button>
+                        <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+                
+                <div class="shop-product-card">
+                    <span class="product-badge limited">LIMITED</span>
+                    <img src="https://assets2.razerzone.com/images/pnx.assets/5f0dfbdb34235ecc06ee5e7fe61a0d98/firefly-pro-500x500-usp-anti-slip-base.webp" alt="Razer Firefly V2" class="product-image">
+                    <h3>Razer Firefly V2</h3>
+                    <p class="product-description">RGB gaming mouse pad with micro-textured surface, customizable lighting effects.</p>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <span style="color: var(--text-secondary); margin-left: 5px;">(63)</span>
+                    </div>
+                    <div class="product-price">
+                        ₹899
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" onclick="addToCart(this)">Add to Cart</button>
+                        <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+                
+                <div class="shop-product-card">
+                    <img src="https://cdn.mos.cms.futurecdn.net/RcXPDPipSsQCycqDXRQzJC.jpg" alt="LG 27GN800-B" class="product-image">
+                    <h3>LG 27GN800-B</h3>
+                    <p class="product-description">27-inch 144Hz gaming monitor, 1ms response, G-SYNC compatible.</p>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        <span style="color: var(--text-secondary); margin-left: 5px;">(112)</span>
+                    </div>
+                    <div class="product-price">
+                        ₹14,999
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" onclick="addToCart(this)">Add to Cart</button>
+                        <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+                
+                <div class="shop-product-card">
+                    <span class="product-badge">BEST VALUE</span>
+                    <img src="https://varietyinfotech.com/wp-content/uploads/4p5p7aa-image-main-600x600-1.webp" alt="HyperX QuadCast S" class="product-image">
+                    <h3>HyperX QuadCast S</h3>
+                    <p class="product-description">RGB condenser microphone with anti-vibration shock mount, tap-to-mute sensor.</p>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                        <span style="color: var(--text-secondary); margin-left: 5px;">(87)</span>
+                    </div>
+                    <div class="product-price">
+                        ₹3,499 <span class="original-price">₹4,999</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" onclick="addToCart(this)">Add to Cart</button>
+                        <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+
+                <!-- Page 2 - Products 9 to 16 (hidden by default, shown when page 2 is active) -->
+                <div class="shop-product-card page2" style="display: none;">
+                    <span class="product-badge new">NEW</span>
+                    <img src="https://m.media-amazon.com/images/I/61mpMH5TzkL._SL1500_.jpg" alt="Logitech G502 Hero" class="product-image">
+                    <h3>Logitech G502 Hero</h3>
+                    <p class="product-description">25K DPI sensor, 11 programmable buttons, adjustable weights, RGB lighting.</p>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <span style="color: var(--text-secondary); margin-left: 5px;">(210)</span>
+                    </div>
+                    <div class="product-price">
+                        ₹3,999 <span class="original-price">₹5,499</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" onclick="addToCart(this)">Add to Cart</button>
+                        <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+                
+                <div class="shop-product-card page2" style="display: none;">
+                    <span class="product-badge">WIRELESS</span>
+                    <img src="https://m.media-amazon.com/images/I/61f1Lf9z3hL._SL1500_.jpg" alt="SteelSeries Arctis 7" class="product-image">
+                    <h3>SteelSeries Arctis 7</h3>
+                    <p class="product-description">Wireless gaming headset with 24-hour battery life, Discord certified.</p>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        <span style="color: var(--text-secondary); margin-left: 5px;">(178)</span>
+                    </div>
+                    <div class="product-price">
+                        ₹11,999 <span class="original-price">₹14,999</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" onclick="addToCart(this)">Add to Cart</button>
+                        <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+                
+                <div class="shop-product-card page2" style="display: none;">
+                    <span class="product-badge">VALUE</span>
+                    <img src="https://m.media-amazon.com/images/I/71Qk7S8fLtL._SL1500_.jpg" alt="Redragon K552 Kumara" class="product-image">
+                    <h3>Redragon K552 Kumara</h3>
+                    <p class="product-description">Compact mechanical keyboard with blue switches, RGB backlight.</p>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        <span style="color: var(--text-secondary); margin-left: 5px;">(340)</span>
+                    </div>
+                    <div class="product-price">
+                        ₹2,499 <span class="original-price">₹3,499</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" onclick="addToCart(this)">Add to Cart</button>
+                        <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+                
+                <div class="shop-product-card page2" style="display: none;">
+                    <span class="product-badge">POPULAR</span>
+                    <img src="https://m.media-amazon.com/images/I/81xG7YdQwHL._SL1500_.jpg" alt="SteelSeries QcK XXL" class="product-image">
+                    <h3>SteelSeries QcK XXL</h3>
+                    <p class="product-description">Large cloth gaming surface, stitched edges, non-slip rubber base.</p>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <span style="color: var(--text-secondary); margin-left: 5px;">(890)</span>
+                    </div>
+                    <div class="product-price">
+                        ₹2,499 <span class="original-price">₹3,299</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" onclick="addToCart(this)">Add to Cart</button>
+                        <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+                
+                <div class="shop-product-card page2" style="display: none;">
+                    <span class="product-badge new">NEW</span>
+                    <img src="https://m.media-amazon.com/images/I/61Pz2W1fYwL._SL1500_.jpg" alt="Sony DualSense Edge" class="product-image">
+                    <h3>Sony DualSense Edge</h3>
+                    <p class="product-description">Ultimate PS5 controller with customizable controls, replaceable modules.</p>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        <span style="color: var(--text-secondary); margin-left: 5px;">(132)</span>
+                    </div>
+                    <div class="product-price">
+                        ₹15,999 <span class="original-price">₹18,999</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" onclick="addToCart(this)">Add to Cart</button>
+                        <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+                
+                <div class="shop-product-card page2" style="display: none;">
+                    <span class="product-badge">COMFORT</span>
+                    <img src="https://m.media-amazon.com/images/I/71FgW8kZz5L._SL1500_.jpg" alt="Corsair T3 Rush" class="product-image">
+                    <h3>Corsair T3 Rush</h3>
+                    <p class="product-description">Breathable fabric gaming chair with 4D armrests, lumbar support.</p>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        <span style="color: var(--text-secondary); margin-left: 5px;">(98)</span>
+                    </div>
+                    <div class="product-price">
+                        ₹19,999 <span class="original-price">₹24,999</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" onclick="addToCart(this)">Add to Cart</button>
+                        <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+                
+                <div class="shop-product-card page2" style="display: none;">
+                    <span class="product-badge">CURVED</span>
+                    <img src="https://m.media-amazon.com/images/I/81dP6P+1rZL._SL1500_.jpg" alt="Samsung Odyssey G7" class="product-image">
+                    <h3>Samsung Odyssey G7</h3>
+                    <p class="product-description">32-inch curved gaming monitor, 240Hz, 1ms, QLED display.</p>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <span style="color: var(--text-secondary); margin-left: 5px;">(220)</span>
+                    </div>
+                    <div class="product-price">
+                        ₹44,999 <span class="original-price">₹54,999</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" onclick="addToCart(this)">Add to Cart</button>
+                        <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+                
+                <div class="shop-product-card page2" style="display: none;">
+                    <span class="product-badge">COMPACT</span>
+                    <img src="https://m.media-amazon.com/images/I/71pF5jWlWFL._SL1500_.jpg" alt="Blue Yeti Nano" class="product-image">
+                    <h3>Blue Yeti Nano</h3>
+                    <p class="product-description">Premium USB microphone for streaming and recording, cardioid pattern.</p>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        <span style="color: var(--text-secondary); margin-left: 5px;">(156)</span>
+                    </div>
+                    <div class="product-price">
+                        ₹7,999 <span class="original-price">₹9,999</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" onclick="addToCart(this)">Add to Cart</button>
+                        <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pagination" id="pagination">
+                <button id="prevPage" disabled><i class="fas fa-chevron-left"></i></button>
+                <button class="active" onclick="changePage(1)">1</button>
+                <button onclick="changePage(2)">2</button>
+                <button id="nextPage" onclick="changePage(2)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>GameZone</h3>
+                <p>Your premier destination for professional gaming accessories. Level up your gameplay with our precision-engineered gear.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="#">Shop</a>
+                <a href="#">Accessories</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Support</h3>
+                <a href="#">FAQs</a>
+                <a href="#">Shipping Policy</a>
+                <a href="#">Return Policy</a>
+                <a href="#">Warranty</a>
+                <a href="#">Contact Support</a>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Gaming Street, Mumbai, India</p>
+                <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+                <p><i class="fas fa-envelope"></i> support@gamezone.com</p>
+                <p><i class="fas fa-clock"></i> Mon-Sun: 10AM - 10PM</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2026 GameZone. All Rights Reserved. | Designed for Gamers, by Gamers</p>
+        </div>
+    </footer>
+
+    <button class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-theme');
+            themeIcon.className = document.body.classList.contains('light-theme') ? 'fas fa-sun' : 'fas fa-moon';
+        });
+        
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        
+        window.addEventListener('scroll', () => {
+            scrollToTopBtn.style.display = window.pageYOffset > 300 ? 'flex' : 'none';
+        });
+        
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        let currentPage = 1;
+        const page1Products = document.querySelectorAll('.shop-product-card:not(.page2)');
+        const page2Products = document.querySelectorAll('.page2');
+        const prevBtn = document.getElementById('prevPage');
+        const nextBtn = document.getElementById('nextPage');
+        const pageButtons = document.querySelectorAll('.pagination button:not(#prevPage):not(#nextPage)');
+        const productsCount = document.getElementById('productsCount');
+
+        function updateProductsCount() {
+            if (currentPage === 1) {
+                productsCount.textContent = 'Showing 1-8 of 16 products';
+            } else {
+                productsCount.textContent = 'Showing 9-16 of 16 products';
+            }
+        }
+
+        function changePage(page) {
+            currentPage = page;
+            
+            if (currentPage === 1) {
+                page1Products.forEach(product => product.style.display = 'flex');
+                page2Products.forEach(product => product.style.display = 'none');
+                prevBtn.disabled = true;
+                nextBtn.disabled = false;
+            } else {
+                page1Products.forEach(product => product.style.display = 'none');
+                page2Products.forEach(product => product.style.display = 'flex');
+                prevBtn.disabled = false;
+                nextBtn.disabled = true;
+            }
+            
+            pageButtons.forEach((btn, index) => {
+                if (index + 1 === currentPage) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            updateProductsCount();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 1) {
+                changePage(currentPage - 1);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentPage < 2) {
+                changePage(currentPage + 1);
+            }
+        });
+
+        pageButtons.forEach((btn, index) => {
+            btn.addEventListener('click', () => changePage(index + 1));
+        });
+
+        window.addToCart = function(button) {
+            const cartCount = document.querySelector('.cart-count');
+            let count = parseInt(cartCount.textContent) || 0;
+            count++;
+            cartCount.textContent = count;
+            
+            const originalText = button.textContent;
+            button.textContent = 'Added!';
+            button.style.backgroundColor = '#16a34a';
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.backgroundColor = '';
+            }, 1000);
+        };
+
+        window.toggleWishlist = function(button) {
+            const icon = button.querySelector('i');
+            if (icon.classList.contains('far')) {
+                icon.className = 'fas fa-heart';
+                button.classList.add('active');
+            } else {
+                icon.className = 'far fa-heart';
+                button.classList.remove('active');
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+                document.body.classList.add('light-theme');
+                themeIcon.className = 'fas fa-sun';
+            }
+            
+            document.querySelectorAll('.shop-product-card').forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-10px)';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0)';
+                });
+            });
+            
+            updateProductsCount();
+        });
+    </script>
+</body>
+</html>
